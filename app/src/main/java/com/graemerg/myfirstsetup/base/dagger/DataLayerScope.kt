@@ -1,7 +1,7 @@
-package com.graemerg.myfirstsetup.base
+package com.graemerg.myfirstsetup.base.dagger
 
 import javax.inject.Scope
 
-@Scope
+@javax.inject.Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DataLayerScope

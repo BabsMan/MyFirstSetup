@@ -1,4 +1,4 @@
-package com.example;
+package com.graemerg;
 
 public class MyClass {
 }

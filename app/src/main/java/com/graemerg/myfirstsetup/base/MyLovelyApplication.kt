@@ -1,6 +1,7 @@
 package com.graemerg.myfirstsetup.base
 
 import android.app.Application
+import com.graemerg.myfirstsetup.base.dagger.*
 
 class MyLovelyApplication: Application() {
 
