@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyFirstSetup</string>
+    <string name="page_body">There\'s a button.\nWill you touch the button?</string>
+    <string name="button_text">Touch the button.</string>
 </resources>
