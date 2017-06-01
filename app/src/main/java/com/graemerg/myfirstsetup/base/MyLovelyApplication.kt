@@ -4,9 +4,20 @@ import android.app.Application
 
 class MyLovelyApplication: Application() {
 
-    val appComponent = DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
+    private lateinit var appComponent: ApplicationComponent
 
-    //val dataLayerComponent = appComponent.plus(DataLayerModule)
+    private lateinit var dataLayerComponent: DataLayerComponent
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // Dagger setup
+        appComponent = DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .build()
+
+        dataLayerComponent = appComponent.plus(DataLayerModule())
+        dataLayerComponent.inject(DataLayerObjects())
+    }
+
 }
