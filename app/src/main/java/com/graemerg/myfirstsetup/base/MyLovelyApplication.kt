@@ -5,7 +5,7 @@ import com.graemerg.myfirstsetup.base.dagger.*
 
 class MyLovelyApplication: Application() {
 
-    private lateinit var appComponent: ApplicationComponent
+    lateinit var appComponent: ApplicationComponent
 
     private lateinit var dataLayerComponent: DataLayerComponent
 
