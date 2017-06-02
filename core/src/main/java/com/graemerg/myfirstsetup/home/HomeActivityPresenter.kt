@@ -19,8 +19,8 @@ class HomeActivityPresenter(val bus: EventBus) {
 
     fun onCreate() = bus.register(this)
     fun onStart() = bus.register(this)
-    fun onStop() = bus.register(this)
-    fun onDestroy() = bus.register(this)
+    fun onStop() = bus.unregister(this)
+    fun onDestroy() = Unit
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: MyResponseEvent) {
