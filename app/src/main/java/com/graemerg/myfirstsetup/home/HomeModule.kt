@@ -1,5 +1,6 @@
 package com.graemerg.myfirstsetup.home
 
+import com.graemerg.myfirstsetup.EventBus
 import dagger.Module
 import dagger.Provides
 
@@ -7,7 +8,12 @@ import dagger.Provides
 class HomeModule {
 
     @Provides
-    fun providesHomeActivityPresenter(): HomeActivityPresenter {
-        return HomeActivityPresenter()
+    fun providesHomeActivityPresenter(bus: EventBus): HomeActivityPresenter {
+        return HomeActivityPresenter(bus)
+    }
+
+    @Provides
+    fun providesHomeActivityInteractor(bus: EventBus): HomeActivityInteractor {
+        return HomeActivityInteractor(bus)
     }
 }

@@ -14,6 +14,9 @@ class HomeActivity: AppCompatActivity(), HomeActivityView {
     @Inject
     protected lateinit var presenter: HomeActivityPresenter
 
+    @Inject
+    protected lateinit var interactor: HomeActivityInteractor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         inject { it.inject(this) }
         super.onCreate(savedInstanceState)
@@ -22,8 +25,23 @@ class HomeActivity: AppCompatActivity(), HomeActivityView {
         pageButton.setOnClickListener { presenter.onButtonPressed() }
 
         presenter.onActivityCreated(this)
+        presenter.onCreate()
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
+    }
 
     override fun setPageTextToPressed() {
         pageBody.text = getString(R.string.pageBodyClicked)

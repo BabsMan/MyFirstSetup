@@ -1,6 +1,11 @@
 package com.graemerg.myfirstsetup.home
 
-class HomeActivityPresenter {
+import com.graemerg.myfirstsetup.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
+
+class HomeActivityPresenter(val bus: EventBus) {
 
     private lateinit var view: HomeActivityView
 
@@ -9,6 +14,16 @@ class HomeActivityPresenter {
     }
 
     fun onButtonPressed() {
+        bus.post(MyFirstEvent)
+    }
+
+    fun onCreate() = bus.register(this)
+    fun onStart() = bus.register(this)
+    fun onStop() = bus.register(this)
+    fun onDestroy() = bus.register(this)
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: MyResponseEvent) {
         view.setPageTextToPressed()
     }
 }
@@ -16,3 +31,5 @@ class HomeActivityPresenter {
 interface HomeActivityView {
     fun setPageTextToPressed()
 }
+
+object MyFirstEvent
