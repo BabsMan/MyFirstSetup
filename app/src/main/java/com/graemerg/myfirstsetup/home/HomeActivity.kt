@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.support.v7.app.AppCompatActivity
-import com.graemerg.myfirstsetup.Interactor
-import com.graemerg.myfirstsetup.InteractorLoader
-import com.graemerg.myfirstsetup.InteractorSupplier
-import com.graemerg.myfirstsetup.R
+import com.graemerg.myfirstsetup.*
 import com.graemerg.myfirstsetup.base.MyLovelyApplication
 import com.graemerg.myfirstsetup.base.dagger.ScreenComponent
 import com.graemerg.myfirstsetup.base.dagger.ScreenModule
@@ -23,6 +20,7 @@ class HomeActivity : AppCompatActivity(), HomeActivityView, LoaderManager.Loader
     @Inject
     protected lateinit var interactor: Lazy<HomeActivityInteractor>
 
+    val lifehooks: Array<Lifehook> get() = arrayOf(presenter)
     val interactors: Array<InteractorSupplier> get() = arrayOf(interactor::get)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,23 +32,18 @@ class HomeActivity : AppCompatActivity(), HomeActivityView, LoaderManager.Loader
         pageButton.setOnClickListener { presenter.onButtonPressed() }
 
         presenter.onActivityCreated(this)
-        presenter.onCreate()
+        lifehooks.forEach { it.onCreate() }
     }
-
     override fun onStart() {
         super.onStart()
-        presenter.onStart()
+        lifehooks.forEach { it.onStart() }
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.onStop()
+        lifehooks.forEach { it.onStop() }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
-    }
 
     override fun setPageTextToPressed() {
         pageBody.text = getString(R.string.pageBodyClicked)
