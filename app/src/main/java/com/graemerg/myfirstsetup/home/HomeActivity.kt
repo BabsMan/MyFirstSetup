@@ -15,7 +15,7 @@ class HomeActivity : BaseActivity(), HomeActivityView, LoaderManager.LoaderCallb
     @Inject
     protected lateinit var interactor: Lazy<HomeActivityInteractor>
 
-    val lifehooks: Array<Lifehook> get() = arrayOf(presenter)
+    override val lifehooks: Array<Lifehook> get() = arrayOf(presenter)
     override val interactors: Array<InteractorSupplier> get() = arrayOf(interactor::get)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,17 +29,6 @@ class HomeActivity : BaseActivity(), HomeActivityView, LoaderManager.LoaderCallb
         presenter.onActivityCreated(this)
         lifehooks.forEach { it.onCreate() }
     }
-
-    override fun onStart() {
-        super.onStart()
-        lifehooks.forEach { it.onStart() }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        lifehooks.forEach { it.onStop() }
-    }
-
 
     override fun setPageTextToPressed() {
         pageBody.text = getString(R.string.pageBodyClicked)

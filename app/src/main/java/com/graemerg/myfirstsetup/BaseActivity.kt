@@ -10,10 +10,22 @@ import com.graemerg.myfirstsetup.base.dagger.ScreenModule
 
 abstract class BaseActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<List<Interactor>> {
 
+    //open val lifehooks: Array<Lifehook> = emptyArray()
+    abstract val lifehooks: Array<Lifehook>
     open val interactors: Array<InteractorSupplier> = emptyArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        lifehooks.forEach { it.onStart() }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        lifehooks.forEach { it.onStop() }
     }
 
     fun inject(injection: (ScreenComponent) -> Unit) {
