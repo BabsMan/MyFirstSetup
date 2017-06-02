@@ -32,6 +32,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    // EventBus, for the... well, EventBus.
+    compile "org.greenrobot:eventbus:$eventbus_verison"
+
     testCompile 'junit:junit:4.12'
 
     compile 'com.google.dagger:dagger:2.10'
